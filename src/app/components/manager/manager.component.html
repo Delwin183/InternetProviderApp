@@ -1,64 +1,94 @@
 <app-sidebar></app-sidebar>
-<!-- Sección de información de los cajeros -->
-<div *ngFor="let Cashier of Cashiers">
-    <div class="card w-50">
-        <div class="card-body">
-            <h5 class="card-title">{{ Cashier?.userName }}</h5>
-            <p class="card-text">ID - {{ Cashier.userId }}</p>
-            <p class="card-text">Email - {{ Cashier.email }}</p>
-            <button
-                (click)="openModal(content, Cashier.userId)"
-                class="btn btn-primary"
-            >
-                Assign Cash
-            </button>
-        </div>
-    </div>
-</div>
 
-<!-- Sección de información de las cajas y sus asignaciones -->
-<div>
-    <h3>Cajas y Asignaciones</h3>
-    <div *ngFor="let cash of Cashierstype">
-        <div class="card">
+<!-- Sección de información de los cajeros -->
+<div class="row mt-4">
+    <div class="col-md-6" *ngFor="let Cashier of Cashiers">
+        <div class="card mb-3">
             <div class="card-body">
                 <h5 class="card-title">
-                    Caja {{ cash.cashNumber }} - {{ cash.cashDescription }}
+                    Usuario Cajero {{ Cashier?.userName }}
                 </h5>
-                <p class="card-text">
-                    Asignada a:
-                    <span *ngIf="cash.assignedTo && cash.assignedTo.length > 0">
-                        {{ cash.assignedTo[0].userName }}
-                    </span>
-                    <span
-                        *ngIf="!cash.assignedTo || cash.assignedTo.length === 0"
-                    >
-                        Sin asignar
-                    </span>
-                </p>
+                <p class="card-text">ID: {{ Cashier.userId }}</p>
+                <p class="card-text">Email: {{ Cashier.email }}</p>
+                <button
+                    (click)="openModal(content, Cashier.userId)"
+                    class="btn btn-primary"
+                >
+                    Asignar Efectivo
+                </button>
             </div>
         </div>
     </div>
 </div>
 
+<!-- Sección de información de las cajas y sus asignaciones -->
+<div class="mt-5">
+    <h3>Cajas y Asignaciones</h3>
+    <div class="row">
+        <div class="col-md-6" *ngFor="let cash of Cashierstype">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        Caja {{ cash.cashNumber }} - {{ cash.cashDescription }}
+                    </h5>
+                    <p class="card-text">
+                        Asignada a:
+                        <span
+                            *ngIf="
+                                cash.assignedTo && cash.assignedTo.length > 0
+                            "
+                        >
+                            {{ cash.assignedTo[0].userName }}
+                        </span>
+                        <span
+                            *ngIf="
+                                !cash.assignedTo || cash.assignedTo.length === 0
+                            "
+                            >Sin asignar</span
+                        >
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
 <ng-template #content let-modal>
     <div class="modal-header">
         <button
-            class="close-button"
+            type="button"
+            class="close"
             aria-label="Close"
             (click)="modal.dismiss('Cross click')"
         >
-            Cerrar X
+            <span aria-hidden="true">&times;</span>
         </button>
-        <h5>Esta Seguro de Realizar esta acción</h5>
+        <h4 class="modal-title">Asignar Caja</h4>
     </div>
     <div class="modal-body">
-        <div class="container-type" *ngFor="let type of Cashierstype">
-            <button (click)="addType(type.cashNumber)">
+        <p>Seleccione el tipo de efectivo a asignar:</p>
+        <div class="container-type">
+            <button
+                class="btn btn-outline-primary mt-2"
+                *ngFor="let type of Cashierstype; let i = index"
+                [class.active]="type.cashNumber === selectedCashType"
+                (click)="selectCashType(type.cashNumber)"
+            >
                 {{ type.cashDescription }}
             </button>
         </div>
-        <button (click)="AssignCash()">Aceptar</button>
-        <button (click)="modal.dismiss('Cross click')">Cancelar</button>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="AssignCash()">
+            Aceptar
+        </button>
+        <button
+            type="button"
+            class="btn btn-secondary"
+            (click)="modal.dismiss('Cross click')"
+        >
+            Cancelar
+        </button>
     </div>
 </ng-template>

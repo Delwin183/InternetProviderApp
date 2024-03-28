@@ -17,6 +17,12 @@ import { CashierService } from '../../services/cashier/cashier.service';
 export class ManagersComponent {
     type: any;
     CashierAssignments: any[] = [];
+
+    selectedCashType: any;
+
+    selectCashType(cashType: any) {
+        this.selectedCashType = cashType;
+    }
     addType(arg0: any) {
         this.type = arg0;
     }
@@ -94,7 +100,7 @@ export class ManagersComponent {
         const credentials = {
             managerId: this.managerId,
             cashierId: this.cashierId,
-            cashId: this.type,
+            cashId: this.selectedCashType, // Usar selectedCashType en lugar de type
         };
         this.CashierService.assignCashiers(credentials).subscribe({
             next: (response: any) => {
