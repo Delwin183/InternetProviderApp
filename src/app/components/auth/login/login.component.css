@@ -1,0 +1,113 @@
+.main {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f2f4f6ce;
+    font-family: "Open Sans", sans-serif;
+}
+
+.login {
+    position: relative;
+    padding: 35px 40px;
+    border-radius: 20px;
+    z-index: 1;
+    overflow: hidden;
+    animation: login 0.88s ease;
+    max-width: 350px;
+    width: 100%;
+}
+
+@keyframes login {
+    0% {
+        transform: translateY(-10%) scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.login:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: #ffffff;
+    width: 100%;
+    z-index: -1;
+    background-size: 182vh;
+    background-position: 28%, 83%;
+    background-repeat: no-repeat;
+}
+
+.heading {
+    font-size: 24px;
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 18px;
+    color: #161623;
+    background: url("https://res.cloudinary.com/duk2gwmbm/image/upload/v1710907579/blob-scene-haikei_1_crpq0t.png");
+    background-position: center;
+    border-radius: 10px;
+}
+
+.input-group input {
+    display: block;
+    margin-bottom: 13px;
+    margin-top: 11px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #161623;
+    cursor: pointer;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    outline: none;
+    border: none;
+    font-size: 16px;
+    border-radius: 8px;
+    background: #5e5f606b;
+    color: #ffffff;
+    transition: all 0.2s ease;
+}
+
+.form-group input:hover {
+    background: #434445;
+}
+
+.form-group input:focus {
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.invalid-feedback {
+    color: #ff6565;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+.login-btn {
+    margin-top: 20px;
+    padding: 12px 20px;
+    font-size: 16px;
+    background: #50505a;
+    border: none;
+    color: #ffffff;
+    border-radius: 8px;
+    width: 100%;
+    transition: background 0.2s ease;
+    cursor: pointer;
+}
+
+.login-btn:hover {
+    background: #1c1c3b;
+}

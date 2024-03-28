@@ -1,0 +1,37 @@
+<app-sidebar></app-sidebar>
+<div *ngFor="let Cashier of Cashiers">
+    <div class="card w-50">
+        <div class="card-body">
+            <h5 class="card-title">{{ Cashier?.userName }}</h5>
+
+            <p class="card-text">{{ Cashier.userId }} - {{ Cashier.email }}</p>
+            <button
+                (click)="abrirModal(content, Cashier.userId)"
+                class="btn btn-primary"
+            >
+                Assign Cash
+            </button>
+        </div>
+    </div>
+</div>
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <button
+            class="close-button"
+            aria-label="Close"
+            (click)="modal.dismiss('Cross click')"
+        >
+            Cerrar X
+        </button>
+        <h5>Esta Seguro de Realizar esta acción</h5>
+    </div>
+    <div class="modal-body">
+        <div class="container-type" *ngFor="let type of Cashierstype">
+            <button (click)="AssingType(type.cashNumber)">
+                {{ type.cashDescription }}
+            </button>
+        </div>
+        <button (click)="AsingCash()">Aceptar</button>
+        <button (click)="modal.dismiss('Cross click')">Cancelar</button>
+    </div>
+</ng-template>

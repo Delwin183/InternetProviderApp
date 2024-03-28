@@ -1,0 +1,158 @@
+<div class="main">
+    <div class="login">
+        <form #loginForm="ngForm" (ngSubmit)="login()">
+            <div class="heading">
+                <h1>Login</h1>
+                <div class="login-icon">
+                    <lord-icon
+                        src="https://cdn.lordicon.com/xirobkro.json"
+                        trigger="hover"
+                        trigger="loop"
+                        delay="2000"
+                        colors="primary:#121331,secondary:#5f606b"
+                        style="width: 130px; height: 150px; opacity: 0.8"
+                    >
+                    </lord-icon>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="userName">Username</label>
+                <div class="input-group">
+                    <input
+                        type="text"
+                        class="form-control"
+                        name="userName"
+                        [(ngModel)]="userName"
+                        #userNameInput="ngModel"
+                        required
+                        minlength="8"
+                        maxlength="20"
+                        pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]*$"
+                        [ngClass]="{
+                            'is-invalid':
+                                userNameInput.invalid &&
+                                (userNameInput.dirty || userNameInput.touched),
+                            'is-valid':
+                                userNameInput.valid &&
+                                (userNameInput.dirty || userNameInput.touched)
+                        }"
+                    />
+                    <div
+                        class="invalid-feedback"
+                        *ngIf="
+                            userNameInput.invalid &&
+                            (userNameInput.dirty || userNameInput.touched)
+                        "
+                    >
+                        <div
+                            *ngIf="
+                                userNameInput.errors &&
+                                userNameInput.errors['required']
+                            "
+                        >
+                            Username is required.
+                        </div>
+                        <div
+                            *ngIf="
+                                userNameInput.errors &&
+                                userNameInput.errors['minlength']
+                            "
+                        >
+                            Username must be at least 8 characters long.
+                        </div>
+                        <div
+                            *ngIf="
+                                userNameInput.errors &&
+                                userNameInput.errors['maxlength']
+                            "
+                        >
+                            Username cannot be more than 20 characters long.
+                        </div>
+                        <div
+                            *ngIf="
+                                userNameInput.errors &&
+                                userNameInput.errors['pattern']
+                            "
+                        >
+                            Username must contain at least one letter and one
+                            number.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input
+                    class="form-control"
+                    type="password"
+                    name="password"
+                    [(ngModel)]="password"
+                    #passwordInput="ngModel"
+                    required
+                    minlength="8"
+                    maxlength="30"
+                    pattern="^(?=.*\d)(?=.*[A-Z]).{8,30}$"
+                    [ngClass]="{
+                        'is-invalid':
+                            passwordInput.invalid &&
+                            (passwordInput.dirty || passwordInput.touched),
+                        'is-valid':
+                            passwordInput.valid &&
+                            (passwordInput.dirty || passwordInput.touched)
+                    }"
+                />
+                <div
+                    class="invalid-feedback"
+                    *ngIf="
+                        passwordInput.invalid &&
+                        (passwordInput.dirty || passwordInput.touched)
+                    "
+                >
+                    <div
+                        *ngIf="
+                            passwordInput.errors &&
+                            passwordInput.errors['required']
+                        "
+                    >
+                        Password is required.
+                    </div>
+                    <div
+                        *ngIf="
+                            passwordInput.errors &&
+                            passwordInput.errors['minlength']
+                        "
+                    >
+                        Password must be at least 8 characters long.
+                    </div>
+                    <div
+                        *ngIf="
+                            passwordInput.errors &&
+                            passwordInput.errors['maxlength']
+                        "
+                    >
+                        Password cannot be more than 30 characters long.
+                    </div>
+                    <div
+                        *ngIf="
+                            passwordInput.errors &&
+                            passwordInput.errors['pattern']
+                        "
+                    >
+                        Password must contain at least one number and one
+                        uppercase letter.
+                    </div>
+                </div>
+            </div>
+            <button
+                type="submit"
+                class="login-btn"
+                [disabled]="!loginForm.valid"
+            >
+                Login
+            </button>
+            <button type="button" class="login-btn">Register</button>
+        </form>
+    </div>
+</div>
